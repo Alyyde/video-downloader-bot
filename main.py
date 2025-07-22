@@ -5,6 +5,8 @@ import os
 TOKEN = os.environ.get("BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
+bot.remove_webhook()  # Webhookni o‘chiradi
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.reply_to(message, "Send me a video link from TikTok, Instagram, or Pinterest.")
@@ -26,5 +28,4 @@ def download_video(message):
     except Exception as e:
         bot.send_message(message.chat.id, f"⚠️ Error: {str(e)}")
 
-bot.remove_webhook()
 bot.polling()
