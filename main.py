@@ -14,20 +14,16 @@ def send_welcome(message):
 def download_video(message):
     url = message.text.strip()
     bot.reply_to(message, "⏳ Downloading...")
-
     try:
         api_url = f"https://save-from.net/api/convert?url={url}"
         res = requests.get(api_url)
         data = res.json()
-
         if 'url' in data and 'meta' in data:
             title = data['meta'].get('title', 'video')
             video_url = data['url']
-            bot.send_message(message.chat.id, f"✅ {title}"
-🔗 {video_url}")
+            bot.send_message(message.chat.id, f"✅ {title}\n🔗 {video_url}")
         else:
             bot.send_message(message.chat.id, "❌ Failed to retrieve video. Try another link.")
-
     except Exception as e:
         bot.send_message(message.chat.id, f"⚠️ Error: {str(e)}")
 
