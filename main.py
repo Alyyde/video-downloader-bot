@@ -1,11 +1,18 @@
+
 import telebot
 import requests
 import os
+from dotenv import load_dotenv
 
-TOKEN = os.environ.get("7525317952:AAFZqCsmhcWpF9qX4iWX2XVmTY7gmq6M8a8")
+# .env faylni yuklaymiz
+load_dotenv()
+
+# TOKEN ni .env dan olamiz
+TOKEN = os.getenv("7525317952:AAFZqCsmhcWpF9qX4iWX2XVmTY7gmq6M8a8")
+
 bot = telebot.TeleBot(TOKEN)
 
-# Webhookni o‘chirish
+# Webhookni o'chiramiz (faqat bir marta ishlatiladi)
 bot.remove_webhook()
 
 @bot.message_handler(commands=['start'])
@@ -28,7 +35,6 @@ def download_video(message):
             bot.send_message(message.chat.id, f"✅ {title}\n🔗 {video_url}")
         else:
             bot.send_message(message.chat.id, "❌ Failed to retrieve video. Try another link.")
-
     except Exception as e:
         bot.send_message(message.chat.id, f"⚠️ Error: {str(e)}")
 
