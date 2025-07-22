@@ -23,7 +23,7 @@ def download_video(message):
         if 'url' in data and 'meta' in data:
             title = data['meta'].get('title', 'video')
             video_url = data['url']
-            bot.send_message(message.chat.id, f"✅ {title}
+            bot.send_message(message.chat.id, f"✅ {title}"
 🔗 {video_url}")
         else:
             bot.send_message(message.chat.id, "❌ Failed to retrieve video. Try another link.")
